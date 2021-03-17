@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo Caro</title>
+</head>
+<style>
+    td{
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        font-size: 30px;
+    }
+</style>
+<body>
+<input type="number" id="row" placeholder="Số hàng" value="10">
+<input type="number" id="col" placeholder="Số cột" value="10">
+<button onclick="taoBanCo()">Tạo bàn cờ</button>
+<table border="1px" id="ban-co"></table>
+<script>
+    let nguoiChoi1 = 'X'; //player1
+    let nguoiChoi2 = 'O'; //player2
+    let oTrong = ''; //empty
+    let luotChoi = nguoiChoi1; //turn
+    function taoBanCo() { //createBoard
+        let row = +document.getElementById('row').value;
+        let col = +document.getElementById('col').value;
+
+        let str = '';
+        for (let i = 0; i < row; i++) {
+            str += '<tr>';
+            for (let j = 0; j < col; j++) {
+                str += '<td onclick="danhCo(this)"></td>';
+            }
+            str += '</tr>';
+        }
+        document.getElementById('ban-co').innerHTML = str;
+    }
+
+    function danhCo(td) { //clickCell
+        if(td.innerHTML === oTrong){
+            if(luotChoi === nguoiChoi1){
+                td.innerHTML = nguoiChoi1;
+                luotChoi = nguoiChoi2;
+            }else{
+                td.innerHTML = nguoiChoi2;
+                luotChoi = nguoiChoi1;
+            }
+        }
+    }
+    taoBanCo();
+</script>
+</body>
+</html>
+<!--
+    B1: Tạo HTML tr + td cứng
+    B2: Tạo bằng vòng lặp
+    B3: Tùy chỉnh số lượng hàng cột
+    B4: Cho nhập vào số lượng hàng cột từ prompt
+    B5: Chuyển prompt sang input và đóng gói vào hàm
+
+    B6: Click đánh X,O
+-->
